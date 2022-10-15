@@ -1,0 +1,1900 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var baseUrl = "http://localhost";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-4.0.0.js"></script>
+
+    <script src="../docs/js/theme-default-4.0.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
+                                <a href="#endpoints-GETapi-user">GET api/user</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-products">
+                                <a href="#endpoints-GETapi-products">GET api/products</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-products-search--keywords-">
+                                <a href="#endpoints-GETapi-products-search--keywords-">GET api/products/search/{keywords}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-products-categories">
+                                <a href="#endpoints-GETapi-products-categories">GET api/products/categories</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-products-category--category_name-">
+                                <a href="#endpoints-GETapi-products-category--category_name-">GET api/products/category/{category_name}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-products">
+                                <a href="#endpoints-POSTapi-products">POST api/products</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-products--product_id-">
+                                <a href="#endpoints-PUTapi-products--product_id-">PUT api/products/{product_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-products--product_id-">
+                                <a href="#endpoints-DELETEapi-products--product_id-">DELETE api/products/{product_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-products--product_id-">
+                                <a href="#endpoints-GETapi-products--product_id-">GET api/products/{product_id}</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+        <ul class="toc-footer" id="last-updated">
+        <li>Last updated: October 15 2022</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://localhost</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+                                <h2 id="endpoints-GETapi-user">GET api/user</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-user">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/user" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/user"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-user">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-user" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-user"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user"></code></pre>
+</span>
+<span id="execution-error-GETapi-user" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-user"></code></pre>
+</span>
+<form id="form-GETapi-user" data-method="GET"
+      data-path="api/user"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-user', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-user"
+                    onclick="tryItOut('GETapi-user');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-user"
+                    onclick="cancelTryOut('GETapi-user');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-user" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/user</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-products">GET api/products</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/products" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-products">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;products&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;ex&quot;,
+            &quot;description&quot;: &quot;atque&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 306.9,
+            &quot;brand&quot;: &quot;rem&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/006622?text=product+aut&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;title&quot;: &quot;nam&quot;,
+            &quot;description&quot;: &quot;velit&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 478.6,
+            &quot;brand&quot;: &quot;facilis&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/004400?text=product+eveniet&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;title&quot;: &quot;quam&quot;,
+            &quot;description&quot;: &quot;dolorem&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 221.4,
+            &quot;brand&quot;: &quot;laboriosam&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ddaa?text=product+vitae&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 4,
+            &quot;title&quot;: &quot;est&quot;,
+            &quot;description&quot;: &quot;nobis&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 249.7,
+            &quot;brand&quot;: &quot;esse&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ee88?text=product+ratione&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 5,
+            &quot;title&quot;: &quot;eligendi&quot;,
+            &quot;description&quot;: &quot;sint&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 263.9,
+            &quot;brand&quot;: &quot;ipsa&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/005511?text=product+impedit&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 6,
+            &quot;title&quot;: &quot;suscipit&quot;,
+            &quot;description&quot;: &quot;voluptatibus&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 437.9,
+            &quot;brand&quot;: &quot;eos&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00dd22?text=product+reiciendis&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 7,
+            &quot;title&quot;: &quot;sed&quot;,
+            &quot;description&quot;: &quot;vel&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 245.6,
+            &quot;brand&quot;: &quot;nobis&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00aa22?text=product+corrupti&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 8,
+            &quot;title&quot;: &quot;voluptatibus&quot;,
+            &quot;description&quot;: &quot;nihil&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 225.2,
+            &quot;brand&quot;: &quot;fuga&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0022cc?text=product+molestias&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 9,
+            &quot;title&quot;: &quot;aut&quot;,
+            &quot;description&quot;: &quot;sunt&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 375.9,
+            &quot;brand&quot;: &quot;ipsam&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ccbb?text=product+autem&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 10,
+            &quot;title&quot;: &quot;eos&quot;,
+            &quot;description&quot;: &quot;nihil&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 341.4,
+            &quot;brand&quot;: &quot;quidem&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00aa99?text=product+quo&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 11,
+            &quot;title&quot;: &quot;pariatur&quot;,
+            &quot;description&quot;: &quot;nemo&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 255.5,
+            &quot;brand&quot;: &quot;maiores&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ee44?text=product+in&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 12,
+            &quot;title&quot;: &quot;possimus&quot;,
+            &quot;description&quot;: &quot;ratione&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 292.6,
+            &quot;brand&quot;: &quot;accusantium&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00cc66?text=product+sunt&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 13,
+            &quot;title&quot;: &quot;eligendi&quot;,
+            &quot;description&quot;: &quot;velit&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 331.5,
+            &quot;brand&quot;: &quot;autem&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/009944?text=product+quo&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 14,
+            &quot;title&quot;: &quot;quia&quot;,
+            &quot;description&quot;: &quot;et&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 324.2,
+            &quot;brand&quot;: &quot;impedit&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/007755?text=product+eum&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 16,
+            &quot;title&quot;: &quot;quis&quot;,
+            &quot;description&quot;: &quot;dolores&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 289.1,
+            &quot;brand&quot;: &quot;vel&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ee77?text=product+enim&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 17,
+            &quot;title&quot;: &quot;quasi&quot;,
+            &quot;description&quot;: &quot;nisi&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 392.2,
+            &quot;brand&quot;: &quot;sint&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/001111?text=product+tempora&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 18,
+            &quot;title&quot;: &quot;eaque&quot;,
+            &quot;description&quot;: &quot;ad&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 257.9,
+            &quot;brand&quot;: &quot;hic&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/005500?text=product+ut&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 19,
+            &quot;title&quot;: &quot;necessitatibus&quot;,
+            &quot;description&quot;: &quot;temporibus&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 321.2,
+            &quot;brand&quot;: &quot;voluptas&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0000cc?text=product+ut&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 20,
+            &quot;title&quot;: &quot;quas&quot;,
+            &quot;description&quot;: &quot;aut&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 326.4,
+            &quot;brand&quot;: &quot;voluptas&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/009966?text=product+impedit&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 21,
+            &quot;title&quot;: &quot;ephone20&quot;,
+            &quot;description&quot;: &quot;wewewewewewewewe&quot;,
+            &quot;currency&quot;: &quot;PHP&quot;,
+            &quot;price&quot;: 80000,
+            &quot;brand&quot;: &quot;iphone&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;samplelink&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:35:11.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 22,
+            &quot;title&quot;: &quot;asperiores&quot;,
+            &quot;description&quot;: &quot;reiciendis&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 257.9,
+            &quot;brand&quot;: &quot;perspiciatis&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/003366?text=product+occaecati&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 23,
+            &quot;title&quot;: &quot;ab&quot;,
+            &quot;description&quot;: &quot;reiciendis&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 389.1,
+            &quot;brand&quot;: &quot;aspernatur&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0088ff?text=product+reiciendis&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 24,
+            &quot;title&quot;: &quot;laboriosam&quot;,
+            &quot;description&quot;: &quot;vero&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 411.2,
+            &quot;brand&quot;: &quot;voluptas&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/002244?text=product+doloremque&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 25,
+            &quot;title&quot;: &quot;ex&quot;,
+            &quot;description&quot;: &quot;illum&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 327.2,
+            &quot;brand&quot;: &quot;ut&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0055aa?text=product+provident&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 26,
+            &quot;title&quot;: &quot;ipsa&quot;,
+            &quot;description&quot;: &quot;odit&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 383.5,
+            &quot;brand&quot;: &quot;et&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00dd33?text=product+officia&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 27,
+            &quot;title&quot;: &quot;consequatur&quot;,
+            &quot;description&quot;: &quot;enim&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 416.4,
+            &quot;brand&quot;: &quot;ea&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0055ff?text=product+sit&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 28,
+            &quot;title&quot;: &quot;rerum&quot;,
+            &quot;description&quot;: &quot;aut&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 357.6,
+            &quot;brand&quot;: &quot;dolorem&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0077cc?text=product+quos&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 29,
+            &quot;title&quot;: &quot;molestiae&quot;,
+            &quot;description&quot;: &quot;maiores&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 317,
+            &quot;brand&quot;: &quot;autem&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00cc11?text=product+nesciunt&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 30,
+            &quot;title&quot;: &quot;et&quot;,
+            &quot;description&quot;: &quot;vel&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 487,
+            &quot;brand&quot;: &quot;quia&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ccff?text=product+vitae&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 31,
+            &quot;title&quot;: &quot;dignissimos&quot;,
+            &quot;description&quot;: &quot;quis&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 248.1,
+            &quot;brand&quot;: &quot;iusto&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/002222?text=product+aut&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 32,
+            &quot;title&quot;: &quot;dicta&quot;,
+            &quot;description&quot;: &quot;et&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 200.8,
+            &quot;brand&quot;: &quot;voluptas&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/006677?text=product+aliquid&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 33,
+            &quot;title&quot;: &quot;quaerat&quot;,
+            &quot;description&quot;: &quot;et&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 318.1,
+            &quot;brand&quot;: &quot;doloribus&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/000055?text=product+omnis&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 34,
+            &quot;title&quot;: &quot;minus&quot;,
+            &quot;description&quot;: &quot;aut&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 289.1,
+            &quot;brand&quot;: &quot;omnis&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0022cc?text=product+molestiae&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 35,
+            &quot;title&quot;: &quot;quod&quot;,
+            &quot;description&quot;: &quot;accusantium&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 410.9,
+            &quot;brand&quot;: &quot;quibusdam&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0022ff?text=product+eveniet&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 36,
+            &quot;title&quot;: &quot;eveniet&quot;,
+            &quot;description&quot;: &quot;sunt&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 231.1,
+            &quot;brand&quot;: &quot;qui&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/006677?text=product+voluptatem&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 37,
+            &quot;title&quot;: &quot;nam&quot;,
+            &quot;description&quot;: &quot;odit&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 260.6,
+            &quot;brand&quot;: &quot;rerum&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00aa55?text=product+quia&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 38,
+            &quot;title&quot;: &quot;praesentium&quot;,
+            &quot;description&quot;: &quot;minima&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 333.3,
+            &quot;brand&quot;: &quot;voluptas&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ee55?text=product+officia&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 39,
+            &quot;title&quot;: &quot;nobis&quot;,
+            &quot;description&quot;: &quot;aperiam&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 294.1,
+            &quot;brand&quot;: &quot;sunt&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00ccff?text=product+aspernatur&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 40,
+            &quot;title&quot;: &quot;quia&quot;,
+            &quot;description&quot;: &quot;provident&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 217.8,
+            &quot;brand&quot;: &quot;officiis&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/004422?text=product+repellendus&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 41,
+            &quot;title&quot;: &quot;vitae&quot;,
+            &quot;description&quot;: &quot;voluptatum&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 395.1,
+            &quot;brand&quot;: &quot;quidem&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/009911?text=product+et&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 42,
+            &quot;title&quot;: &quot;est&quot;,
+            &quot;description&quot;: &quot;voluptatum&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 205.8,
+            &quot;brand&quot;: &quot;et&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/004477?text=product+dignissimos&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 43,
+            &quot;title&quot;: &quot;et&quot;,
+            &quot;description&quot;: &quot;voluptate&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 439.1,
+            &quot;brand&quot;: &quot;modi&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/007766?text=product+sequi&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 44,
+            &quot;title&quot;: &quot;a&quot;,
+            &quot;description&quot;: &quot;aliquid&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 480.8,
+            &quot;brand&quot;: &quot;ad&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/0066ff?text=product+sed&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 45,
+            &quot;title&quot;: &quot;hic&quot;,
+            &quot;description&quot;: &quot;perspiciatis&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 287.1,
+            &quot;brand&quot;: &quot;deserunt&quot;,
+            &quot;category&quot;: &quot;books&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/00cc66?text=product+est&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 46,
+            &quot;title&quot;: &quot;deserunt&quot;,
+            &quot;description&quot;: &quot;doloribus&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 499.7,
+            &quot;brand&quot;: &quot;illum&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/006677?text=product+reiciendis&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 47,
+            &quot;title&quot;: &quot;quas&quot;,
+            &quot;description&quot;: &quot;molestias&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 242.5,
+            &quot;brand&quot;: &quot;dolorem&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/000033?text=product+nostrum&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 48,
+            &quot;title&quot;: &quot;aspernatur&quot;,
+            &quot;description&quot;: &quot;est&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 422.9,
+            &quot;brand&quot;: &quot;deserunt&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/003388?text=product+vitae&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 49,
+            &quot;title&quot;: &quot;in&quot;,
+            &quot;description&quot;: &quot;et&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 385.2,
+            &quot;brand&quot;: &quot;saepe&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/004444?text=product+reprehenderit&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 50,
+            &quot;title&quot;: &quot;molestias&quot;,
+            &quot;description&quot;: &quot;voluptas&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 334.6,
+            &quot;brand&quot;: &quot;voluptas&quot;,
+            &quot;category&quot;: &quot;shoes&quot;,
+            &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/006677?text=product+nesciunt&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 51,
+            &quot;title&quot;: &quot;russ&quot;,
+            &quot;description&quot;: &quot;wewewew russ pogi&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;price&quot;: 9.999999989989898e+27,
+            &quot;brand&quot;: &quot;puma&quot;,
+            &quot;category&quot;: &quot;electronics&quot;,
+            &quot;image&quot;: &quot;ttps://via.placeholder.com/640x480.png/007755?text=product+eum&quot;,
+            &quot;created_at&quot;: &quot;2022-10-08T06:28:01.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-08T06:28:01.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-products"></code></pre>
+</span>
+<span id="execution-error-GETapi-products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-products"></code></pre>
+</span>
+<form id="form-GETapi-products" data-method="GET"
+      data-path="api/products"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-products"
+                    onclick="tryItOut('GETapi-products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-products"
+                    onclick="cancelTryOut('GETapi-products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-products" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/products</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-products-search--keywords-">GET api/products/search/{keywords}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-products-search--keywords-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/products/search/veniam" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products/search/veniam"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-products-search--keywords-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;products&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-products-search--keywords-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-products-search--keywords-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-products-search--keywords-"></code></pre>
+</span>
+<span id="execution-error-GETapi-products-search--keywords-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-products-search--keywords-"></code></pre>
+</span>
+<form id="form-GETapi-products-search--keywords-" data-method="GET"
+      data-path="api/products/search/{keywords}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-products-search--keywords-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-products-search--keywords-"
+                    onclick="tryItOut('GETapi-products-search--keywords-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-products-search--keywords-"
+                    onclick="cancelTryOut('GETapi-products-search--keywords-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-products-search--keywords-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/products/search/{keywords}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>keywords</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="keywords"
+               data-endpoint="GETapi-products-search--keywords-"
+               value="veniam"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-products-categories">GET api/products/categories</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-products-categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/products/categories" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products/categories"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-products-categories">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 57
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;categories&quot;: [
+        &quot;electronics&quot;,
+        &quot;shoes&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;books&quot;,
+        &quot;electronics&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;books&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;books&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;books&quot;,
+        &quot;electronics&quot;,
+        &quot;shoes&quot;,
+        &quot;books&quot;,
+        &quot;books&quot;,
+        &quot;books&quot;,
+        &quot;books&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;electronics&quot;,
+        &quot;electronics&quot;,
+        &quot;books&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;,
+        &quot;electronics&quot;,
+        &quot;shoes&quot;,
+        &quot;shoes&quot;,
+        &quot;electronics&quot;
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-products-categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-products-categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-products-categories"></code></pre>
+</span>
+<span id="execution-error-GETapi-products-categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-products-categories"></code></pre>
+</span>
+<form id="form-GETapi-products-categories" data-method="GET"
+      data-path="api/products/categories"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-products-categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-products-categories"
+                    onclick="tryItOut('GETapi-products-categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-products-categories"
+                    onclick="cancelTryOut('GETapi-products-categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-products-categories" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/products/categories</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-products-category--category_name-">GET api/products/category/{category_name}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-products-category--category_name-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/products/category/sint" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products/category/sint"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-products-category--category_name-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 56
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;products&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-products-category--category_name-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-products-category--category_name-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-products-category--category_name-"></code></pre>
+</span>
+<span id="execution-error-GETapi-products-category--category_name-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-products-category--category_name-"></code></pre>
+</span>
+<form id="form-GETapi-products-category--category_name-" data-method="GET"
+      data-path="api/products/category/{category_name}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-products-category--category_name-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-products-category--category_name-"
+                    onclick="tryItOut('GETapi-products-category--category_name-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-products-category--category_name-"
+                    onclick="cancelTryOut('GETapi-products-category--category_name-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-products-category--category_name-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/products/category/{category_name}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>category_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="category_name"
+               data-endpoint="GETapi-products-category--category_name-"
+               value="sint"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-products">POST api/products</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/products" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"praesentium\",
+    \"description\": \"quam\",
+    \"currency\": \"delectus\",
+    \"price\": \"hic\",
+    \"brand\": \"et\",
+    \"category\": \"aliquid\",
+    \"image\": \"eius\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "praesentium",
+    "description": "quam",
+    "currency": "delectus",
+    "price": "hic",
+    "brand": "et",
+    "category": "aliquid",
+    "image": "eius"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-products">
+</span>
+<span id="execution-results-POSTapi-products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-products"></code></pre>
+</span>
+<span id="execution-error-POSTapi-products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-products"></code></pre>
+</span>
+<form id="form-POSTapi-products" data-method="POST"
+      data-path="api/products"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-products"
+                    onclick="tryItOut('POSTapi-products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-products"
+                    onclick="cancelTryOut('POSTapi-products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-products" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/products</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="title"
+               data-endpoint="POSTapi-products"
+               value="praesentium"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="description"
+               data-endpoint="POSTapi-products"
+               value="quam"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>currency</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="currency"
+               data-endpoint="POSTapi-products"
+               value="delectus"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>price</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="price"
+               data-endpoint="POSTapi-products"
+               value="hic"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>brand</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="brand"
+               data-endpoint="POSTapi-products"
+               value="et"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="category"
+               data-endpoint="POSTapi-products"
+               value="aliquid"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="image"
+               data-endpoint="POSTapi-products"
+               value="eius"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+                    <h2 id="endpoints-PUTapi-products--product_id-">PUT api/products/{product_id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-products--product_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/products/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"in\",
+    \"description\": \"voluptatibus\",
+    \"currency\": \"reprehenderit\",
+    \"price\": \"sapiente\",
+    \"brand\": \"earum\",
+    \"category\": \"consequatur\",
+    \"image\": \"et\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "in",
+    "description": "voluptatibus",
+    "currency": "reprehenderit",
+    "price": "sapiente",
+    "brand": "earum",
+    "category": "consequatur",
+    "image": "et"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-products--product_id-">
+</span>
+<span id="execution-results-PUTapi-products--product_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-products--product_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-products--product_id-"></code></pre>
+</span>
+<span id="execution-error-PUTapi-products--product_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-products--product_id-"></code></pre>
+</span>
+<form id="form-PUTapi-products--product_id-" data-method="PUT"
+      data-path="api/products/{product_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-products--product_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-products--product_id-"
+                    onclick="tryItOut('PUTapi-products--product_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-products--product_id-"
+                    onclick="cancelTryOut('PUTapi-products--product_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-products--product_id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/products/{product_id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number"
+               name="product_id"
+               data-endpoint="PUTapi-products--product_id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the product.</p>
+            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="title"
+               data-endpoint="PUTapi-products--product_id-"
+               value="in"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="description"
+               data-endpoint="PUTapi-products--product_id-"
+               value="voluptatibus"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>currency</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="currency"
+               data-endpoint="PUTapi-products--product_id-"
+               value="reprehenderit"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>price</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="price"
+               data-endpoint="PUTapi-products--product_id-"
+               value="sapiente"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>brand</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="brand"
+               data-endpoint="PUTapi-products--product_id-"
+               value="earum"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="category"
+               data-endpoint="PUTapi-products--product_id-"
+               value="consequatur"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="image"
+               data-endpoint="PUTapi-products--product_id-"
+               value="et"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-products--product_id-">DELETE api/products/{product_id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-products--product_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/products/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-products--product_id-">
+</span>
+<span id="execution-results-DELETEapi-products--product_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-products--product_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-products--product_id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-products--product_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-products--product_id-"></code></pre>
+</span>
+<form id="form-DELETEapi-products--product_id-" data-method="DELETE"
+      data-path="api/products/{product_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-products--product_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-products--product_id-"
+                    onclick="tryItOut('DELETEapi-products--product_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-products--product_id-"
+                    onclick="cancelTryOut('DELETEapi-products--product_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-products--product_id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/products/{product_id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number"
+               name="product_id"
+               data-endpoint="DELETEapi-products--product_id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the product.</p>
+            </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-products--product_id-">GET api/products/{product_id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-products--product_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/products/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/products/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-products--product_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 55
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;products&quot;: {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;ex&quot;,
+        &quot;description&quot;: &quot;atque&quot;,
+        &quot;currency&quot;: &quot;USD&quot;,
+        &quot;price&quot;: 306.9,
+        &quot;brand&quot;: &quot;rem&quot;,
+        &quot;category&quot;: &quot;electronics&quot;,
+        &quot;image&quot;: &quot;https://via.placeholder.com/640x480.png/006622?text=product+aut&quot;,
+        &quot;created_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2022-10-08T06:12:07.000000Z&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-products--product_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-products--product_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-products--product_id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-products--product_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-products--product_id-"></code></pre>
+</span>
+<form id="form-GETapi-products--product_id-" data-method="GET"
+      data-path="api/products/{product_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-products--product_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-products--product_id-"
+                    onclick="tryItOut('GETapi-products--product_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-products--product_id-"
+                    onclick="cancelTryOut('GETapi-products--product_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-products--product_id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/products/{product_id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number"
+               name="product_id"
+               data-endpoint="GETapi-products--product_id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the product.</p>
+            </p>
+                    </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
